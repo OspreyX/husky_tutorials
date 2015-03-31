@@ -33,6 +33,7 @@
  *********************************************************************/
 
 /* Author: Ioan Sucan */
+/* Reconfigured by Devon Ash to work on a HuskyUR5 platform */
 
 #include <ros/ros.h>
 
@@ -60,7 +61,7 @@ void pick(moveit::planning_interface::MoveGroup &group)
   g.grasp_pose = p;
 
   g.pre_grasp_approach.direction.vector.x = 1.0;
-  g.pre_grasp_approach.direction.header.frame_id = "r_wrist_roll_link";
+  g.pre_grasp_approach.direction.header.frame_id = "ur5_arm_wrist_3_link";
   g.pre_grasp_approach.min_distance = 0.2;
   g.pre_grasp_approach.desired_distance = 0.4;
 
@@ -69,12 +70,12 @@ void pick(moveit::planning_interface::MoveGroup &group)
   g.post_grasp_retreat.min_distance = 0.1;
   g.post_grasp_retreat.desired_distance = 0.25;
 
-  g.pre_grasp_posture.joint_names.resize(1, "r_gripper_joint");
+  g.pre_grasp_posture.joint_names.resize(1, "ur5_arm_ee_link");
   g.pre_grasp_posture.points.resize(1);
   g.pre_grasp_posture.points[0].positions.resize(1);
   g.pre_grasp_posture.points[0].positions[0] = 1;
 
-  g.grasp_posture.joint_names.resize(1, "r_gripper_joint");
+  g.grasp_posture.joint_names.resize(1, "ur5_arm_ee_link");
   g.grasp_posture.points.resize(1);
   g.grasp_posture.points[0].positions.resize(1);
   g.grasp_posture.points[0].positions[0] = 0;
@@ -103,13 +104,13 @@ void place(moveit::planning_interface::MoveGroup &group)
   g.pre_place_approach.direction.vector.z = -1.0;
   g.post_place_retreat.direction.vector.x = -1.0;
   g.post_place_retreat.direction.header.frame_id = "base_footprint";
-  g.pre_place_approach.direction.header.frame_id = "r_wrist_roll_link";
+  g.pre_place_approach.direction.header.frame_id = "ur5_arm_wrist_3_link";
   g.pre_place_approach.min_distance = 0.1;
   g.pre_place_approach.desired_distance = 0.2;
   g.post_place_retreat.min_distance = 0.1;
   g.post_place_retreat.desired_distance = 0.25;
 
-  g.post_place_posture.joint_names.resize(1, "r_gripper_joint");
+  g.post_place_posture.joint_names.resize(1, "ur5_arm_ee_link");
   g.post_place_posture.points.resize(1);
   g.post_place_posture.points[0].positions.resize(1);
   g.post_place_posture.points[0].positions[0] = 1;
@@ -122,7 +123,7 @@ void place(moveit::planning_interface::MoveGroup &group)
   moveit_msgs::Constraints constr;
   constr.orientation_constraints.resize(1);
   moveit_msgs::OrientationConstraint &ocm = constr.orientation_constraints[0];
-  ocm.link_name = "r_wrist_roll_link";
+  ocm.link_name = "ur5_arm_wrist_3_link";
   ocm.header.frame_id = p.header.frame_id;
   ocm.orientation.x = 0.0;
   ocm.orientation.y = 0.0;
@@ -140,7 +141,7 @@ void place(moveit::planning_interface::MoveGroup &group)
 
 int main(int argc, char **argv)
 {
-  ros::init (argc, argv, "right_arm_pick_place");
+  ros::init (argc, argv, "ur5_arm_pick_and_place");
   ros::AsyncSpinner spinner(1);
   spinner.start();
 
@@ -150,7 +151,7 @@ int main(int argc, char **argv)
 
   ros::WallDuration(1.0).sleep();
 
-  moveit::planning_interface::MoveGroup group("right_arm");
+  moveit::planning_interface::MoveGroup group("ur5_arm");
   group.setPlanningTime(45.0);
 
   moveit_msgs::CollisionObject co;
@@ -177,8 +178,6 @@ int main(int argc, char **argv)
   co.primitive_poses[0].orientation.w = 1.0;
   pub_co.publish(co);
 
-
-
   // remove table
   co.id = "table";
   co.operation = moveit_msgs::CollisionObject::REMOVE;
@@ -193,8 +192,6 @@ int main(int argc, char **argv)
   co.primitive_poses[0].position.y = -0.2;
   co.primitive_poses[0].position.z = 0.175;
   pub_co.publish(co);
-
-
 
   co.id = "part";
   co.operation = moveit_msgs::CollisionObject::REMOVE;
