@@ -2,17 +2,12 @@
 <package>
   <name>husky_tutorials</name>
   <version>0.2.0</version>
-  <description>Clearpath Husky controller configurations</description>
+  <description>Husky tutorials that demonstrate the Husky's capabilities</description>
 
-  <author email="pbovbel@clearpathrobotics.com">Paul Bovbel</author>
-
-  <maintainer email="pbovbel@clearpathrobotics.com">Paul Bovbel</maintainer>
+  <author email="dash@clearpathrobotics.com">Devon Ash</author>
+  <maintainer email="dash@clearpathrobotics.com">Devon Ash</maintainer>
 
   <license>BSD</license>
-
-  <url type="website">http://ros.org/wiki/husky_control</url>
-  <url type="bugtracker">https://github.com/husky/husky_control/issues</url>
-  <url type="repository">https://github.com/husly/husky_control</url>
 
   <buildtool_depend>catkin</buildtool_depend>
   <build_depend>roslaunch</build_depend>

@@ -172,7 +172,7 @@ int main(int argc, char **argv)
   co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 0.1;
   co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 1.0;
   co.primitive_poses.resize(1);
-  co.primitive_poses[0].position.x = 0.7;
+  co.primitive_poses[0].position.x = 1.7;
   co.primitive_poses[0].position.y = -0.4;
   co.primitive_poses[0].position.z = 0.85;
   co.primitive_poses[0].orientation.w = 1.0;
@@ -188,7 +188,7 @@ int main(int argc, char **argv)
   co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_X] = 0.5;
   co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 1.5;
   co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.35;
-  co.primitive_poses[0].position.x = 0.7;
+  co.primitive_poses[0].position.x = 1.7;
   co.primitive_poses[0].position.y = -0.2;
   co.primitive_poses[0].position.z = 0.175;
   pub_co.publish(co);
@@ -206,7 +206,7 @@ int main(int argc, char **argv)
   co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Y] = 0.1;
   co.primitives[0].dimensions[shape_msgs::SolidPrimitive::BOX_Z] = 0.3;
 
-  co.primitive_poses[0].position.x = 0.6;
+  co.primitive_poses[0].position.x = 1.6;
   co.primitive_poses[0].position.y = -0.7;
   co.primitive_poses[0].position.z = 0.5;
   pub_co.publish(co);
